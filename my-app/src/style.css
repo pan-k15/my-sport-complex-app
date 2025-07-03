@@ -1,0 +1,159 @@
+@import "tailwindcss";
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  --color-green-dark: #003C43;
+  --color-green-medium: #135D66;
+  --color-green-light: #77B0AA;
+  --color-green-very-light: #E3FEF7;
+
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-neutral: #6b7280;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  padding: 2em;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+
+    --color-green-dark: #003C43;
+    --color-green-medium: #135D66;
+    --color-green-light: #77B0AA;
+    --color-green-very-light: #E3FEF7;
+  
+    --color-success: #22c55e;
+    --color-warning: #eab308;
+    --color-neutral: #6b7280;
+
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+
+.custom-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-blue-light);
+  border-radius: 0.5rem;
+  outline: none;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  color: var(--color-purple-dark);
+  background-color: var(--color-blue-very-light);
+}
+
+.custom-input::placeholder {
+  color: var(--color-blue-indigo);
+}
+
+.custom-input:focus {
+  border-color: var(--color-purple-dark);
+  box-shadow: 0 0 0 3px rgba(82, 53, 123, 0.5);
+  background-color: #fff;
+  color: var(--color-purple-dark);
+}
+
+.custom-button {
+  background-color: var(--color-green-medium); /* #135D66 */
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.custom-button:hover {
+  background-color: var(--color-green-dark); /* #003C43 */
+}
+
+
+.label-text {
+  color: var(--color-purple-dark);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+  font-size: 0.9rem;
+}
+
+/* สถานะ */
+.status-confirmed {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.status-pending {
+  color: var(--color-warning);
+  font-weight: 600;
+}
+
+.status-default {
+  color: var(--color-neutral);
+}
