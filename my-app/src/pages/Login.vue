@@ -39,7 +39,12 @@
   
           <button type="submit"
                   class="w-full py-3 rounded-lg font-semibold bg-[var(--color-green-medium)] text-white hover:bg-[var(--color-green-dark)] transition">
-            เข้าสู่ระบบ
+            <router-link
+  to="/dashboard"
+>
+  เข้าสู่ระบบ
+</router-link>
+
           </button>
         </form>
   
@@ -47,7 +52,7 @@
           ยังไม่มีบัญชี?
           <button @click="$emit('switch','register')"
                   class="text-[var(--color-green-medium)] font-semibold hover:underline">
-            สมัครสมาชิก
+                  สมัครสมาชิก
           </button>
         </p>
       </div>

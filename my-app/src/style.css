@@ -1,69 +1,38 @@
 @import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* ✅ ColorHunt Palette */
   --color-green-dark: #003C43;
   --color-green-medium: #135D66;
   --color-green-light: #77B0AA;
   --color-green-very-light: #E3FEF7;
 
+  /* ✅ Status Colors */
   --color-success: #22c55e;
   --color-warning: #eab308;
   --color-neutral: #6b7280;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  color-scheme: light dark;
+  color: #213547;
+  background-color: #ffffff;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* ✅ Default Body and App Container */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
+  display: flex;
+  place-items: center;
+  background-color: var(--color-green-very-light);
 }
 
 #app {
@@ -73,77 +42,78 @@ button:focus-visible {
   text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-
-    --color-green-dark: #003C43;
-    --color-green-medium: #135D66;
-    --color-green-light: #77B0AA;
-    --color-green-very-light: #E3FEF7;
-  
-    --color-success: #22c55e;
-    --color-warning: #eab308;
-    --color-neutral: #6b7280;
-
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* ✅ Heading */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--color-green-dark);
 }
 
+/* ✅ Button Style */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-green-medium);
+  color: white;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
 
+button:hover {
+  background-color: var(--color-green-dark);
+}
+
+/* ✅ Custom Input */
 .custom-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--color-blue-light);
+  border: 1px solid var(--color-green-light);
   border-radius: 0.5rem;
+  background-color: white;
+  color: var(--color-green-dark);
   outline: none;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  color: var(--color-purple-dark);
-  background-color: var(--color-blue-very-light);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .custom-input::placeholder {
-  color: var(--color-blue-indigo);
+  color: var(--color-green-light);
 }
 
 .custom-input:focus {
-  border-color: var(--color-purple-dark);
-  box-shadow: 0 0 0 3px rgba(82, 53, 123, 0.5);
-  background-color: #fff;
-  color: var(--color-purple-dark);
+  border-color: var(--color-green-medium);
+  box-shadow: 0 0 0 3px rgba(19, 93, 102, 0.2);
 }
 
+/* ✅ Custom Button */
 .custom-button {
-  background-color: var(--color-green-medium); /* #135D66 */
+  background-color: var(--color-green-medium);
   color: white;
   font-weight: 600;
   padding: 0.75rem 0;
   width: 100%;
   border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
   border: none;
+  transition: background-color 0.3s ease;
 }
 
 .custom-button:hover {
-  background-color: var(--color-green-dark); /* #003C43 */
+  background-color: var(--color-green-dark);
 }
 
-
+/* ✅ Label */
 .label-text {
-  color: var(--color-purple-dark);
+  color: var(--color-green-dark);
   font-weight: 600;
   margin-bottom: 0.25rem;
   display: block;
   font-size: 0.9rem;
 }
 
-/* สถานะ */
+/* ✅ Status Tags */
 .status-confirmed {
   color: var(--color-success);
   font-weight: 600;
