@@ -39,21 +39,18 @@
   
           <button type="submit"
                   class="w-full py-3 rounded-lg font-semibold bg-[var(--color-green-medium)] text-white hover:bg-[var(--color-green-dark)] transition">
-            <router-link
-  to="/dashboard"
->
-  เข้าสู่ระบบ
-</router-link>
-
+            เข้าสู่ระบบ
           </button>
         </form>
   
         <p class="text-center text-sm text-[var(--color-green-dark)] mt-6">
           ยังไม่มีบัญชี?
-          <button @click="$emit('switch','register')"
-                  class="text-[var(--color-green-medium)] font-semibold hover:underline">
+          <router-link
+            to="/register"
+            class="text-[var(--color-green-medium)] font-semibold hover:underline"
+          >
                   สมัครสมาชิก
-          </button>
+          </router-link>
         </p>
       </div>
     </div>
@@ -61,13 +58,15 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
   
+  const router = useRouter()
   const email = ref('')
   const password = ref('')
   
   function handleLogin() {
-    alert(`กำลังเข้าสู่ระบบด้วย: ${email.value}`)
     // TODO: เชื่อม API login จริง
+    router.push('/dashboard')
   }
   </script>
   

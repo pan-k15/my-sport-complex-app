@@ -60,12 +60,12 @@
   
         <p class="text-center mt-6 text-sm" style="color: var(--color-green-dark);">
     มีบัญชีแล้ว?
-    <button
-      @click="$emit('switch', 'login')"
+    <router-link
+      to="/login"
       class="font-semibold underline text-[var(--color-green-light)] hover:text-[var(--color-green-dark)]"
     >
       เข้าสู่ระบบ
-    </button>
+    </router-link>
   </p>
   
       </div>
@@ -74,7 +74,9 @@
   
   <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
   
+  const router = useRouter()
   const name = ref('')
   const email = ref('')
   const password = ref('')
@@ -87,7 +89,7 @@
     }
   
     // TODO: เชื่อม API หรือ Firebase ที่นี่
-    alert(`✅ Register: ${name.value}, ${email.value}`)
+    router.push('/login')
   }
   </script>
   

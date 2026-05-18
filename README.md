@@ -1,91 +1,172 @@
 # My Sport Complex App
 
-เว็บแอปพลิเคชันสำหรับจัดการระบบจองสนามกีฬา (Sport Complex Booking System)  
-พัฒนาด้วย Vue.js เพื่อให้ผู้ใช้งานสามารถดูสนามกีฬา, จองสนาม, และตรวจสอบสถานะการจองได้ง่ายและรวดเร็ว
+Sport complex booking system for viewing courts, creating bookings, checking booking status, and managing simple admin pages.
 
----
+The project is split into:
 
-## ฟีเจอร์หลัก
+- `my-app/` - Vue 3 frontend built with Vite, Vue Router, and Tailwind CSS.
+- `backend/` - Express API with in-memory mock data for fields and bookings.
 
-- แสดงรายการสนามกีฬาที่มีในสปอร์ตคอมเพล็กซ์
-- ระบบจองสนามกีฬาแบบออนไลน์
-- ดูประวัติการจองของผู้ใช้งาน
-- ยกเลิกการจองสนามกีฬาได้
-- UI สวยงามและตอบสนองได้ดี (responsive)
+## Features
 
----
+- User landing, login, register, and dashboard pages
+- Booking form with date/time validation
+- Booking list page with cancellation support
+- Admin login and dashboard shell
+- Express API for fields and bookings
+- Local frontend fallback for bookings when the API is unavailable
 
-## เทคโนโลยีที่ใช้
+## Tech Stack
 
-- Vue.js 3 (Composition API + script setup)
-- Vue Router (ถ้ามี)
-- Pinia หรือ Vuex (ถ้ามี state management)
-- CSS / SCSS หรือ UI Framework (ถ้ามี)
+- Vue 3
+- Vue Router
+- Vite
+- Tailwind CSS
+- Express
+- CORS
+- dotenv
 
----
+## Requirements
 
-## การติดตั้งและใช้งาน
+- Node.js 20.x
+- npm
 
-1. **โคลนโปรเจกต์**
+The frontend currently uses Vite 5 because it works with Node `20.5.1`. If you upgrade to Vite 7 later, use Node `20.19.0` or newer.
+
+## Installation
+
+Install dependencies for both apps:
 
 ```bash
-git clone https://github.com/pan-k15/my-sport-complex-app.git
-cd my-sport-complex-app/my-app
-```
-
-2. **ติดตั้ง dependencies**
-
-```bash
+cd backend
 npm install
-# หรือ
-yarn install
+
+cd ../my-app
+npm install
 ```
 
-3. **รันโปรเจกต์ในโหมดพัฒนา**
+## Running Locally
+
+Start the backend API:
 
 ```bash
+cd backend
+node index.js
+```
+
+The backend runs at:
+
+```text
+http://localhost:3000
+```
+
+Start the frontend in another terminal:
+
+```bash
+cd my-app
 npm run dev
-# หรือ
-yarn dev
 ```
 
-4. เปิดเว็บเบราว์เซอร์แล้วเข้า [http://localhost:3000](http://localhost:3000) (หรือตามที่ terminal แจ้ง)
+Vite will print the frontend URL, usually:
 
----
-
-## โครงสร้างโปรเจกต์ (เบื้องต้น)
-
+```text
+http://localhost:5173
 ```
-my-app/
-├── public/          # ไฟล์สาธารณะ เช่น favicon, index.html
-├── src/
-│   ├── assets/      # รูปภาพ, ไอคอน, CSS, SCSS
-│   ├── components/  # คอมโพเนนต์ Vue
-│   ├── views/       # หน้าแต่ละหน้าในแอป
-│   ├── router/      # ไฟล์ตั้งค่า Vue Router (ถ้ามี)
-│   ├── store/       # การจัดการสถานะ (ถ้ามี)
-│   └── App.vue      # คอมโพเนนต์หลัก
-│   └── main.js      # จุดเริ่มต้นแอป
-├── package.json
+
+## Frontend Environment
+
+By default, the frontend calls:
+
+```text
+http://localhost:3000
+```
+
+To use another API URL, create `my-app/.env`:
+
+```bash
+VITE_API_URL=http://localhost:3000
+```
+
+## Available Routes
+
+Frontend routes:
+
+- `/` - home page
+- `/login` - user login
+- `/register` - user registration
+- `/dashboard` - user dashboard with recent bookings
+- `/book` - booking form
+- `/bookings` - booking list and cancellation page
+- `/admin/login` - admin login
+- `/admin/dashboard` - admin dashboard
+
+## API Endpoints
+
+Backend endpoints:
+
+```text
+GET    /
+GET    /fields
+GET    /bookings
+POST   /bookings
+DELETE /bookings/:id
+```
+
+Example booking payload:
+
+```json
+{
+  "sportType": "ฟุตซอล",
+  "courtId": "สนาม 1",
+  "date": "2026-05-18",
+  "startTime": "10:00",
+  "endTime": "11:00"
+}
+```
+
+`POST /bookings` requires `sportType`, `courtId`, `date`, `startTime`, and `endTime`. `endTime` must be later than `startTime`.
+
+## Build
+
+Build the frontend:
+
+```bash
+cd my-app
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```text
+.
+├── backend/
+│   ├── index.js
+│   ├── package.json
+│   └── package-lock.json
+├── my-app/
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── api.js
+│       ├── App.vue
+│       ├── main.js
+│       ├── router.js
+│       ├── style.css
+│       └── pages/
 └── README.md
 ```
 
----
+## Notes
 
-## การพัฒนาเพิ่มเติม
-
-- เพิ่มระบบล็อกอินผู้ใช้
-- เชื่อมต่อ Backend API สำหรับข้อมูลสนามกีฬาและการจองจริง
-- เพิ่มระบบแจ้งเตือน (Notification)
-- ปรับ UI ให้รองรับการใช้งานบนมือถือ (Mobile Friendly)
-
----
-
-## License
-
-โปรเจกต์นี้เปิดให้ใช้งานภายใต้ [MIT License](LICENSE)
-
----
-
-ถ้าคุณมีคำถามหรืออยากร่วมพัฒนา โปรดเปิด Issue หรือ Pull Request ได้เลยครับ!  
-ขอบคุณที่สนใจโปรเจกต์นี้ 🙏
+- Backend data is stored in memory and resets when the server restarts.
+- The frontend stores bookings in `localStorage` only when the backend is unavailable.
+- The current login/register flows are placeholders and do not authenticate against a real user database yet.
+- Admin login accepts the current mock credentials in `AdminLogin.vue`.

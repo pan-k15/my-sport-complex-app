@@ -50,12 +50,16 @@
                     </span>
                   </td>
                 </tr>
-                <tr v-if="bookings.length === 0">
+                <tr v-if="!loading && bookings.length === 0">
                   <td colspan="5" class="text-center py-6 text-gray-400">ยังไม่มีการจอง</td>
+                </tr>
+                <tr v-if="loading">
+                  <td colspan="5" class="text-center py-6 text-gray-400">กำลังโหลด...</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <p v-if="errorMessage" class="mt-4 text-sm text-red-600">{{ errorMessage }}</p>
         </div>
       </div>
     </div>
@@ -63,36 +67,29 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
+  import { getBookings } from '../api'
   
   const bookings = ref([])
+  const loading = ref(false)
+  const errorMessage = ref('')
   
-  onMounted(() => {
-    bookings.value = [
-      {
-        id: 1,
-        sportType: 'ฟุตซอล',
-        courtId: 'สนาม 1',
-        date: '2025-07-05',
-        startTime: '17:00',
-        endTime: '18:00',
-        status: 'รอตรวจสอบ'
-      },
-      {
-        id: 2,
-        sportType: 'แบดมินตัน',
-        courtId: 'สนาม 2',
-        date: '2025-07-06',
-        startTime: '19:00',
-        endTime: '20:00',
-        status: 'ยืนยันแล้ว'
-      }
-    ]
+  onMounted(async () => {
+    loading.value = true
+    try {
+      bookings.value = await getBookings()
+    } catch (error) {
+      errorMessage.value = error.message || 'ไม่สามารถโหลดรายการจองได้'
+    } finally {
+      loading.value = false
+    }
   })
   
   function statusClass(status) {
     switch (status) {
       case 'ยืนยันแล้ว': return 'text-green-600 font-medium'
       case 'รอตรวจสอบ': return 'text-yellow-600 font-medium'
+      case 'confirmed': return 'text-green-600 font-medium'
+      case 'pending': return 'text-yellow-600 font-medium'
       default: return 'text-gray-600'
     }
   }

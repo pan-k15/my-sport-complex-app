@@ -45,7 +45,12 @@
           </div>
         </div>
 
-        <button type="submit" class="custom-button">ยืนยันการจอง</button>
+        <p v-if="errorMessage" class="text-sm text-red-600">{{ errorMessage }}</p>
+        <p v-if="successMessage" class="text-sm text-green-600">{{ successMessage }}</p>
+
+        <button type="submit" class="custom-button" :disabled="submitting">
+          {{ submitting ? 'กำลังบันทึก...' : 'ยืนยันการจอง' }}
+        </button>
       </form>
     </div>
   </div>
@@ -53,14 +58,28 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { createBooking } from '../api'
 
+const router = useRouter()
 const sportType = ref('')
 const courtId = ref('')
 const date = ref('')
 const startTime = ref('')
 const endTime = ref('')
+const submitting = ref(false)
+const errorMessage = ref('')
+const successMessage = ref('')
 
-function submitBooking() {
+async function submitBooking() {
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  if (startTime.value >= endTime.value) {
+    errorMessage.value = 'เวลาสิ้นสุดต้องมากกว่าเวลาเริ่ม'
+    return
+  }
+
   const bookingData = {
     sportType: sportType.value,
     courtId: courtId.value,
@@ -70,14 +89,20 @@ function submitBooking() {
     status: 'รอตรวจสอบ'
   }
 
-  console.log('📌 Booking:', bookingData)
-  alert('✅ จองสำเร็จ!')
-
-  sportType.value = ''
-  courtId.value = ''
-  date.value = ''
-  startTime.value = ''
-  endTime.value = ''
+  submitting.value = true
+  try {
+    await createBooking(bookingData)
+    successMessage.value = 'จองสำเร็จ'
+    sportType.value = ''
+    courtId.value = ''
+    date.value = ''
+    startTime.value = ''
+    endTime.value = ''
+    router.push('/dashboard')
+  } catch (error) {
+    errorMessage.value = error.message || 'ไม่สามารถบันทึกการจองได้'
+  } finally {
+    submitting.value = false
+  }
 }
 </script>
-

@@ -32,7 +32,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const username = ref('')
 const password = ref('')
 const errorMessage = ref('')
@@ -46,9 +48,7 @@ function handleLogin() {
   setTimeout(() => {
     loading.value = false
     if (username.value === 'admin' && password.value === 'password123') {
-      alert('Login successful! Redirecting...')
-      // ทำ redirect หรือเปลี่ยนหน้าได้ เช่น
-      // router.push('/admin/dashboard')
+      router.push('/admin/dashboard')
     } else {
       errorMessage.value = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'
     }
@@ -133,4 +133,3 @@ function handleLogin() {
   font-weight: 600;
 }
 </style>
-
